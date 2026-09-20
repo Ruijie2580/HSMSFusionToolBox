@@ -1,0 +1,46 @@
+defaults:
+- _self_
+- experiment: chikusei/s3o_x4
+- runtime: single_gpu
+
+paths:
+  runs_dir: runs
+  output_dir: output
+
+seed: 42
+resume: null
+run_dir: null
+checkpoint_name: best
+prediction_path: null
+
+metrics:
+  protocol_version: hif_metrics_v1
+  leaderboard:
+  - psnr_global
+  - ssim_band_mean
+  - sam_deg
+  - ergas
+  - rmse_global
+  - uiqi
+  epsilon: 1e-8
+  sam_epsilon: 1e-8
+  ssim:
+    window_size: 11
+    sigma: 1.5
+    padding: reflect
+    k1: 0.01
+    k2: 0.03
+
+benchmark:
+  name: chikusei_wv2_x4_known_v1
+  operator_access: known
+
+hydra:
+  job:
+    chdir: false
+  run:
+    dir: .
+  sweep:
+    dir: .
+    subdir: .
+  output_subdir: null

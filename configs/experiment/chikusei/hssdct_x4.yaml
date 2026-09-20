@@ -1,0 +1,64 @@
+# @package _global_
+
+defaults:
+- /dataset: chikusei
+- /degradation: chikusei_wv2_x4
+- _self_
+
+experiment:
+  name: hssdct_chikusei_x4
+
+model:
+  name: HSSDCT
+  params:
+    bands: 128
+    msi_bands: 8
+    nf: 64
+    gc: 32
+    snr: 0
+    network_mode: 1
+    groups: 1
+    debug: False
+  inference:
+    mode: full
+
+training:
+  trainer:
+    max_epochs: 200
+    check_val_every_n_epoch: 5
+    log_every_n_steps: 10
+    progress_bar: true
+  optimizer:
+    name: adam
+    lr: 0.0001
+    betas: [ 0.9, 0.999 ]
+    weight_decay: 0.0
+  scheduler:
+    name: none
+  loss:
+    reconstruction:
+    - name: l1
+      alias: reconstruction
+      weight: 1.0
+    regularization: []
+  dataloader:
+    materialization_batch_size: 8
+    train:
+      batch_size: 16
+      shuffle: true
+      pin_memory: true
+      num_workers: 0
+    valid:
+      batch_size: 16
+      shuffle: false
+      pin_memory: true
+      num_workers: 0
+    test:
+      batch_size: 1
+      shuffle: false
+      pin_memory: true
+      num_workers: 0
+  checkpoint:
+    monitor: val/psnr_global
+    mode: max
+    uses_validation_gt: true

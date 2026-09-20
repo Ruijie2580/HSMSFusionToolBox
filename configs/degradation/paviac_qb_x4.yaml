@@ -1,0 +1,16 @@
+# PaviaC H5 stores HRHS only; HRMS is synthesized with the bundled QuickBird SRF.
+spectral:
+  name: tabulated_srf
+  sensor: quickbird
+  response_file: QuickBird_srf.mat
+  wavelength_start_nm: 430.0
+  wavelength_end_nm: 860.0
+  num_hsi_bands: 102
+  num_msi_bands: 4
+spatial:
+  name: gaussian_decimation
+  scale: 4
+  kernel_size: 9
+  sigma: 2.0
+  padding: reflect
+  offset: [ 0, 0 ]

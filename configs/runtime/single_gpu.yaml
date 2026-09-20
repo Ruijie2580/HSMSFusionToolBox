@@ -1,0 +1,4 @@
+accelerator: gpu
+devices: 1
+precision: fp32
+

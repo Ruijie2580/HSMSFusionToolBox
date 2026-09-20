@@ -1,0 +1,15 @@
+spectral:
+  name: tabulated_srf
+  sensor: nikon_d700
+  response_file: Nikon_D700_srf.mat
+  wavelength_start_nm: 420.0
+  wavelength_end_nm: 720.0
+  num_hsi_bands: 31
+  num_msi_bands: 3
+spatial:
+  name: gaussian_decimation
+  scale: 4
+  kernel_size: 9
+  sigma: 2.0
+  padding: reflect
+  offset: [ 0, 0 ]

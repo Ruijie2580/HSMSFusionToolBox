@@ -1,0 +1,15 @@
+spectral:
+  name: tabulated_srf
+  sensor: wv2
+  response_file: WV2_srf.mat
+  wavelength_start_nm: 380.0
+  wavelength_end_nm: 1050.0
+  num_hsi_bands: 144
+  num_msi_bands: 8
+spatial:
+  name: gaussian_decimation
+  scale: 4
+  kernel_size: 9
+  sigma: 2.0
+  padding: reflect
+  offset: [ 0, 0 ]

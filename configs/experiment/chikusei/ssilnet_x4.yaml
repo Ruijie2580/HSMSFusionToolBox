@@ -1,0 +1,66 @@
+# @package _global_
+
+defaults:
+- /dataset: chikusei
+- /degradation: chikusei_wv2_x4
+- _self_
+
+experiment:
+  name: ssilnet_chikusei_x4
+
+model:
+  name: SSILNet
+  params:
+    hsi_channels: 128
+    msi_channels: 8
+    scale: 4
+    hidden: 64
+  inference:
+    mode: full
+
+training:
+  trainer:
+    max_epochs: 200
+    check_val_every_n_epoch: 5
+    log_every_n_steps: 10
+    progress_bar: true
+  optimizer:
+    name: adam
+    lr: 0.0001
+    betas: [ 0.9, 0.999 ]
+    weight_decay: 0.0
+  scheduler:
+    name: none
+  loss:
+    reconstruction:
+    - name: l1
+      alias: reconstruction
+      weight: 1.0
+    # Upstream optimizes L1 + 0.1 * cal_sam, where cal_sam returns the mean
+    # spectral angle divided by pi.  The toolbox's sam term returns radians, so
+    # the coefficient carries the 1/pi: 0.1 / pi = 0.0318309886.
+    regularization:
+    - name: sam
+      alias: spectral_angle
+      weight: 0.0318310
+  dataloader:
+    materialization_batch_size: 8
+    train:
+      batch_size: 16
+      shuffle: true
+      pin_memory: true
+      num_workers: 0
+    valid:
+      batch_size: 16
+      shuffle: false
+      pin_memory: true
+      num_workers: 0
+    test:
+      batch_size: 1
+      shuffle: false
+      pin_memory: true
+      num_workers: 0
+  checkpoint:
+    monitor: val/psnr_global
+    mode: max
+    uses_validation_gt: true

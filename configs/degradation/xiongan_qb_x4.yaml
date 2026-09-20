@@ -1,0 +1,15 @@
+spectral:
+  name: tabulated_srf
+  sensor: quickbird
+  response_file: QuickBird_srf.mat
+  wavelength_start_nm: 400.0
+  wavelength_end_nm: 1000.0
+  num_hsi_bands: 128
+  num_msi_bands: 4
+spatial:
+  name: gaussian_decimation
+  scale: 4
+  kernel_size: 9
+  sigma: 2.0
+  padding: reflect
+  offset: [ 0, 0 ]
