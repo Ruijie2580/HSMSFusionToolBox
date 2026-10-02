@@ -24,17 +24,7 @@ dataloader settings.
 
 Current recipes:
 
-- `chikusei/cgsfn_x4`
-- `chikusei/clsnet_x4`
-- `chikusei/lso_x4`
-- `chikusei/mctnet_x4`
-- `chikusei/s3o_x4`
-- `chikusei/scsrnet_x4`
-- `chikusei/sdpnet_x4`
-- `chikusei/smgu_x4`
-- `chikusei/ssilnet_x4`
-- `paviac/cauwt_x4`
-- `icvl/cauwt_x4`
+- `chikusei/cyberfuse_x4`
 
 The Chikusei reference protocol materializes HRMS and LRHS in CPU memory once
 per process, then transfers pinned batches to one GPU.
@@ -45,17 +35,17 @@ curves onto the configured HSI wavelength grid before row normalization. The
 other bundled sensor files can be selected by changing `response_file`, sensor,
 and expected MSI band count together.
 
-The PaviaC recipe uses the 102-band HRHS splits under `Dataset/PaviaC`, maps the
-430--840 nm HSI grid to four QuickBird MSI bands with
-`hsmsfusion/degradations/srf/QuickBird_srf.mat`, and uses the same fixed Gaussian
-blur/decimation protocol at scale 4. The current PaviaC H5 files contain HRHS
-only, so HRMS and LRHS are materialized from this configured observation model.
+The PaviaC dataset uses the 102-band HRHS splits under `Dataset/PaviaC`;
+`configs/degradation/paviac_qb_x4.yaml` maps the 430--840 nm HSI grid to four
+QuickBird MSI bands with `hsmsfusion/degradations/srf/QuickBird_srf.mat` and uses
+the same fixed Gaussian blur/decimation protocol at scale 4. The current PaviaC
+H5 files contain HRHS only, so HRMS and LRHS are materialized from this
+configured observation model.
 
-The ICVL recipe uses the 31-band NCHW HRHS splits under `Dataset/ICVL`, whose
-standard wavelength grid is 400--700 nm. It synthesizes three-band Nikon D700
-HRMS observations and Gaussian x4 LRHS observations. Because the ICVL test
-images are 1024 x 1024, CAUWT uses 256-pixel tiled inference with a 4-pixel
-shave margin by default.
+The ICVL dataset uses the 31-band NCHW HRHS splits under `Dataset/ICVL`, whose
+standard wavelength grid is 400--700 nm. `configs/degradation/icvl_nikon_x4.yaml`
+synthesizes three-band Nikon D700 HRMS observations and Gaussian x4 LRHS
+observations.
 
 ## Utility scripts
 
