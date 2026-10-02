@@ -4,7 +4,7 @@ spectral:
   sensor: quickbird
   response_file: QuickBird_srf.mat
   wavelength_start_nm: 430.0
-  wavelength_end_nm: 860.0
+  wavelength_end_nm: 840.0
   num_hsi_bands: 102
   num_msi_bands: 4
 spatial:

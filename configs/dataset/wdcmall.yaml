@@ -1,0 +1,5 @@
+name: wdcmall
+root: Dataset/WDCMall
+hsi_channels: 191
+cache_device: cpu
+already_augmented: true

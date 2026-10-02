@@ -1,0 +1,5 @@
+name: paviac
+root: Dataset/PaviaC
+hsi_channels: 102
+cache_device: cpu
+already_augmented: true

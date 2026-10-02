@@ -1,0 +1,5 @@
+name: houston
+root: Dataset/Houston
+hsi_channels: 144
+cache_device: cpu
+already_augmented: true

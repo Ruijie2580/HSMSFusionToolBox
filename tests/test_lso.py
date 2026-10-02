@@ -175,8 +175,11 @@ def test_lso_lightning_training_step() -> None:
     assert loss.ndim == 0
 
 
-def test_lso_recipe_composes() -> None:
+def test_lso_recipe_composes(require_recipe) -> None:
+    require_recipe("chikusei/lso_x4")
+
     from hydra import compose, initialize_config_dir
+
     from hsmsfusion.cli import _build_model
 
     config_directory = Path(__file__).resolve().parents[1] / "configs"

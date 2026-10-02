@@ -2,9 +2,9 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import pytest
 from hydra import compose, initialize_config_dir
 from omegaconf import OmegaConf
-import pytest
 
 from hsmsfusion.cli import (
     _build_datamodule,
@@ -21,7 +21,32 @@ def _compose(*overrides: str):
         return compose(config_name="config", overrides=list(overrides))
 
 
-def test_clsnet_recipe_owns_training_and_dataloader_configuration() -> None:
+def test_cyberfuse_recipe_owns_training_and_dataloader_configuration() -> None:
+    config = _compose("experiment=chikusei/cyberfuse_x4")
+
+    assert config.experiment.name == "cyberfuse_chikusei_x4"
+    assert config.model.name == "CyberFuse"
+    assert config.model.params.hsi_channels == 128
+    assert config.model.params.msi_channels == 8
+    assert config.model.params.scale == 4
+    assert config.training.trainer.max_epochs == 300
+    assert config.training.optimizer.lr == 2e-4
+    assert config.training.scheduler.name == "MultiStepLR"
+    assert list(config.training.scheduler.milestones) == [200, 250]
+    assert "optimizer" not in config
+    assert "trainer" not in config
+
+    model = _build_model(config)
+    datamodule = _build_datamodule(config, requires_gt=model.requires_gt)
+    assert type(model).__name__ == "CyberFuseLightningModule"
+    # Upstream declares `Net` twice in network.py; the second shadows the first.
+    assert type(model.network).__name__ == "Net"
+    assert datamodule._loader_options["valid"]["shuffle"] is False
+
+
+def test_clsnet_recipe_owns_training_and_dataloader_configuration(require_recipe) -> None:
+    require_recipe("chikusei/clsnet_x4")
+
     config = _compose("experiment=chikusei/clsnet_x4")
 
     assert config.experiment.name == "clsnet_chikusei_x4"
@@ -41,7 +66,9 @@ def test_clsnet_recipe_owns_training_and_dataloader_configuration() -> None:
     assert datamodule._loader_options["valid"]["shuffle"] is False
 
 
-def test_validation_cadence_is_recipe_owned_and_must_be_positive() -> None:
+def test_validation_cadence_is_recipe_owned_and_must_be_positive(require_recipe) -> None:
+    require_recipe("chikusei/clsnet_x4")
+
     config = _compose(
         "experiment=chikusei/clsnet_x4",
         "training.trainer.check_val_every_n_epoch=5",
@@ -54,7 +81,9 @@ def test_validation_cadence_is_recipe_owned_and_must_be_positive() -> None:
         _validation_interval(invalid_config)
 
 
-def test_paviac_quickbird_recipe_composes_with_102_hsi_bands() -> None:
+def test_paviac_quickbird_recipe_composes_with_102_hsi_bands(require_recipe) -> None:
+    require_recipe("paviac/cauwt_x4")
+
     config = _compose("experiment=paviac/cauwt_x4")
 
     assert config.experiment.name == "cauwt_paviac_x4"
@@ -73,7 +102,9 @@ def test_paviac_quickbird_recipe_composes_with_102_hsi_bands() -> None:
     assert datamodule.observation_generator.spectral_operator.srf.shape == (4, 102)
 
 
-def test_icvl_nikon_recipe_composes_with_31_hsi_bands() -> None:
+def test_icvl_nikon_recipe_composes_with_31_hsi_bands(require_recipe) -> None:
+    require_recipe("icvl/cauwt_x4")
+
     config = _compose("experiment=icvl/cauwt_x4")
 
     assert config.experiment.name == "cauwt_icvl_x4"

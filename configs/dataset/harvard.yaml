@@ -1,0 +1,5 @@
+name: harvard
+root: Dataset/Harvard
+hsi_channels: 31
+cache_device: cpu
+already_augmented: true

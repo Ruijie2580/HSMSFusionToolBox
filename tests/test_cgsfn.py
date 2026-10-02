@@ -135,8 +135,11 @@ def test_cgsfn_tiled_inference_stitches_a_full_scene() -> None:
     assert torch.isfinite(prediction).all()
 
 
-def test_cgsfn_recipe_composes() -> None:
+def test_cgsfn_recipe_composes(require_recipe) -> None:
+    require_recipe("chikusei/cgsfn_x4")
+
     from hydra import compose, initialize_config_dir
+
     from hsmsfusion.cli import _build_model
 
     config_directory = Path(__file__).resolve().parents[1] / "configs"

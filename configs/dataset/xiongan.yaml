@@ -1,0 +1,5 @@
+name: xiongan
+root: Dataset/XiongAn
+hsi_channels: 128
+cache_device: cpu
+already_augmented: true

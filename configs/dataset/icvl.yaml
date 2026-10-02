@@ -1,0 +1,5 @@
+name: icvl
+root: Dataset/ICVL
+hsi_channels: 31
+cache_device: cpu
+already_augmented: true
