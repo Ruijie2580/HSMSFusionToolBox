@@ -8,16 +8,20 @@ import torch
 from torch import nn
 
 from hsmsfusion.core.exceptions import ConfigurationError, ContractError
-from hsmsfusion.core.registry import (
-    SPECTRAL_OPERATOR_REGISTRY,
-    SPATIAL_OPERATOR_REGISTRY,
-)
 from hsmsfusion.core.protocols import validate_nchw
+from hsmsfusion.core.registry import (
+    SPATIAL_OPERATOR_REGISTRY,
+    SPECTRAL_OPERATOR_REGISTRY,
+)
 
 # Import concrete operator modules for their explicit registry side effects.
-from hsmsfusion.degradations.spatial.gaussian_decimation import GaussianDecimation as _GaussianDecimation
-from hsmsfusion.degradations.spectral.gaussian_srf import GaussianSRF as _GaussianSRF
-from hsmsfusion.degradations.spectral.tabulated_srf import TabulatedSRF as _TabulatedSRF
+from hsmsfusion.degradations.spatial.gaussian_decimation import (
+    GaussianDecimation as _GaussianDecimation,  # noqa: F401
+)
+from hsmsfusion.degradations.spectral.gaussian_srf import GaussianSRF as _GaussianSRF  # noqa: F401
+from hsmsfusion.degradations.spectral.tabulated_srf import (
+    TabulatedSRF as _TabulatedSRF,  # noqa: F401
+)
 
 
 def _plain_mapping(config: Mapping[str, object]) -> dict[str, object]:

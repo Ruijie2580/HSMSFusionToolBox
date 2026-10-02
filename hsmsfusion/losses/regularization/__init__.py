@@ -2,9 +2,9 @@
 
 from hsmsfusion.losses.regularization.terms import (
     SAMRegularizationLoss,
-    SSIMRegularizationLoss,
     SpatialEdgeRegularizationLoss,
     SpectralEdgeRegularizationLoss,
+    SSIMRegularizationLoss,
     TotalVariationRegularizationLoss,
 )
 

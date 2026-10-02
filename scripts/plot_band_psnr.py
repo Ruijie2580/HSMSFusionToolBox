@@ -14,11 +14,12 @@ from __future__ import annotations
 
 import csv
 import math
-from dataclasses import dataclass
-from pathlib import Path
-from collections.abc import Callable, Sequence
 import sys
 import threading
+from collections.abc import Callable, Sequence
+from dataclasses import dataclass
+from pathlib import Path
+from typing import TYPE_CHECKING
 
 # Allow ``python scripts/plot_band_psnr.py`` from the project root.
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
@@ -28,9 +29,9 @@ import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+import numpy as np
 from matplotlib.figure import Figure
 from matplotlib.ticker import MaxNLocator
-import numpy as np
 
 from scripts._shared import (
     discover_output_predictions,
@@ -42,6 +43,9 @@ from scripts._shared import (
     setup_matplotlib_font,
     validate_hsi_dataset,
 )
+
+if TYPE_CHECKING:
+    from tkinter import ttk
 
 setup_matplotlib_font()
 
@@ -624,6 +628,7 @@ class BandPsnrGui:
         try:
             import tkinter as tk
             from tkinter import filedialog, messagebox, ttk
+
             from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
         except ImportError as error:  # pragma: no cover - platform-owned dependency
             raise RuntimeError("The per-band PSNR GUI requires Tkinter.") from error

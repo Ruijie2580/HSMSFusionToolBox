@@ -4,8 +4,8 @@ from hsmsfusion.core.registry import (
     DATASET_REGISTRY,
     METRIC_REGISTRY,
     MODEL_REGISTRY,
-    SPECTRAL_OPERATOR_REGISTRY,
     SPATIAL_OPERATOR_REGISTRY,
+    SPECTRAL_OPERATOR_REGISTRY,
 )
 
 __all__ = [

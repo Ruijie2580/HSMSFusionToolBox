@@ -73,15 +73,15 @@ def ssim_band_mean(
     prediction_4d = prediction[None]
     target_4d = target[None]
     if padding_mode == "zeros":
-        convolve = lambda tensor: functional.conv2d(
-            tensor, window, padding=padding, groups=channels
-        )
+        def convolve(tensor: torch.Tensor) -> torch.Tensor:
+            return functional.conv2d(tensor, window, padding=padding, groups=channels)
     elif padding_mode in {"reflect", "replicate", "circular"}:
-        convolve = lambda tensor: functional.conv2d(
-            functional.pad(tensor, (padding, padding, padding, padding), mode=padding_mode),
-            window,
-            groups=channels,
-        )
+        def convolve(tensor: torch.Tensor) -> torch.Tensor:
+            padded = functional.pad(
+                tensor, (padding, padding, padding, padding), mode=padding_mode
+            )
+            return functional.conv2d(padded, window, groups=channels)
+
     else:
         raise ConfigurationError(f"Unsupported SSIM padding mode: {padding_mode!r}.")
 

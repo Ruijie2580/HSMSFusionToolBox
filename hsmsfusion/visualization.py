@@ -15,7 +15,6 @@ import numpy as np
 import torch
 import torch.nn.functional as functional
 
-
 _RGB_WAVELENGTHS_NM = (650.0, 550.0, 450.0)
 
 

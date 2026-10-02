@@ -21,7 +21,7 @@ dependencies = [
 ]
 
 [project.optional-dependencies]
-dev = ["pytest>=8.0"]
+dev = ["pytest>=8.0", "ruff>=0.6"]
 
 [project.scripts]
 hsmsfusion = "hsmsfusion.cli:main"
@@ -35,3 +35,19 @@ include = ["hsmsfusion*"]
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "-ra"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
+extend-ignore = ["E501"] # 存量长行过多，不整体重排
+
+[tool.ruff.lint.per-file-ignores]
+# 上游论文移植文件，保持与源码贴近；不重排 import、不清理其死代码/空白风格。
+"hsmsfusion/models/**" = [
+    "E401", "E402", "E701", "E702", "E741",
+    "F811", "F821", "F841", "F901", "F401",
+    "I001", "W291", "W292", "W293",
+]

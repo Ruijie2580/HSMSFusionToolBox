@@ -40,11 +40,11 @@ import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+import numpy as np
 from matplotlib.backends.backend_agg import FigureCanvasAgg
 from matplotlib.figure import Figure
 from matplotlib.patches import Rectangle
 from matplotlib.ticker import MaxNLocator
-import numpy as np
 
 from scripts._shared import (
     discover_output_predictions,
@@ -802,6 +802,7 @@ class SpectralCurveGui:
         try:
             import tkinter as tk
             from tkinter import filedialog, messagebox, ttk
+
             from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
             from matplotlib.widgets import RectangleSelector
         except ImportError as error:  # pragma: no cover - platform-owned dependency
@@ -1237,7 +1238,7 @@ class SpectralCurveGui:
         self.zoom_range = (band0, band1, y0, y1)
         self._refresh_curve_figure()
         self.status.set(
-            f"Zoom inset added. Drag again to replace it, or click 'Clear zoom' to remove it."
+            "Zoom inset added. Drag again to replace it, or click 'Clear zoom' to remove it."
         )
 
     def _zoom_display_range(self) -> tuple[float, float, float, float] | None:

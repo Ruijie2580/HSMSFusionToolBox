@@ -15,7 +15,6 @@ from hsmsfusion.core.exceptions import ConfigurationError
 from hsmsfusion.core.protocols import validate_nchw
 from hsmsfusion.core.registry import SPECTRAL_OPERATOR_REGISTRY
 
-
 _BUNDLED_SRF_DIRECTORY = Path(__file__).resolve().parents[1] / "srf"
 
 

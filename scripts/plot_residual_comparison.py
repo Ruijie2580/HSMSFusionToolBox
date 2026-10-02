@@ -3,11 +3,11 @@
 from __future__ import annotations
 
 import argparse
+import sys
+import threading
 from collections.abc import Callable, Sequence
 from dataclasses import dataclass, field
 from pathlib import Path
-import sys
-import threading
 
 # Allow ``python scripts/plot_residual_comparison.py`` from the project root.
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
@@ -15,9 +15,9 @@ sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 import matplotlib
 
 matplotlib.use("Agg")
-from matplotlib import patches
 import matplotlib.pyplot as plt
 import numpy as np
+from matplotlib import patches
 
 from scripts._shared import (
     _FIGURE_FONT,
@@ -610,6 +610,7 @@ class ResidualComparisonGui:
         try:
             import tkinter as tk
             from tkinter import filedialog, messagebox, ttk
+
             from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg, NavigationToolbar2Tk
             from matplotlib.widgets import RectangleSelector
         except ImportError as error:  # pragma: no cover - platform-owned dependency

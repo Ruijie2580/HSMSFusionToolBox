@@ -30,7 +30,6 @@ from rich.text import Text
 from hsmsfusion.metrics.evaluator import EvaluationResult
 from hsmsfusion.visualization import save_srf_curve, save_validation_comparison
 
-
 _TERMINAL_CONSOLE = Console(
     color_system="auto",
     force_terminal=None,
@@ -582,7 +581,6 @@ def print_test_report(
 
     metric_names: list[str] = list(result.summary["metrics"])
     labels: list[str] = [_METRIC_LABELS.get(n, n) for n in metric_names]
-    n_metrics = len(metric_names)
 
     # -- Metrics table (per-image + mean + std) -----------------------------
     tbl = Table(box=active_box, show_header=True, header_style="bold bright_cyan", padding=(0, 1), expand=True)

@@ -2,15 +2,15 @@
 
 from __future__ import annotations
 
-from collections.abc import Mapping, Sequence
+from collections.abc import Mapping
 
 import torch
 import torch.nn.functional as functional
 from torch import nn
 
 from hsmsfusion.core.exceptions import ConfigurationError
-from hsmsfusion.core.registry import SPATIAL_OPERATOR_REGISTRY
 from hsmsfusion.core.protocols import validate_nchw
+from hsmsfusion.core.registry import SPATIAL_OPERATOR_REGISTRY
 
 
 @SPATIAL_OPERATOR_REGISTRY.register("gaussian_decimation")

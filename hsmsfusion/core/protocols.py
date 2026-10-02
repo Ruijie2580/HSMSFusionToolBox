@@ -8,7 +8,6 @@ import torch
 
 from hsmsfusion.core.exceptions import ContractError
 
-
 OBSERVATION_KEYS = ("lr_hsi", "hr_msi")
 
 

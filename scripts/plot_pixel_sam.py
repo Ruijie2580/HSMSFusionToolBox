@@ -21,11 +21,11 @@ from __future__ import annotations
 
 import argparse
 import math
+import sys
+import threading
 from collections.abc import Callable, Sequence
 from dataclasses import dataclass
 from pathlib import Path
-import sys
-import threading
 
 # Allow ``python scripts/plot_pixel_sam.py`` from the project root.
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
@@ -35,9 +35,9 @@ import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
+import numpy as np
 from matplotlib.figure import Figure
 from matplotlib.ticker import FixedLocator, LogLocator, NullLocator
-import numpy as np
 
 from scripts._shared import (
     discover_output_predictions,
@@ -698,6 +698,7 @@ class PixelSamGui:
         try:
             import tkinter as tk
             from tkinter import filedialog, messagebox, ttk
+
             from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
         except ImportError as error:  # pragma: no cover - platform-owned dependency
             raise RuntimeError("The pixel-SAM GUI requires Tkinter.") from error

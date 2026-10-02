@@ -21,11 +21,11 @@ from __future__ import annotations
 import argparse
 import csv
 import re
+import sys
+import threading
 from collections.abc import Callable, Mapping, Sequence
 from dataclasses import dataclass, field
 from pathlib import Path
-import sys
-import threading
 
 # Allow ``python scripts/plot_metric_summary.py`` from the project root.
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
@@ -34,8 +34,8 @@ import matplotlib
 
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-from matplotlib.figure import Figure
 import numpy as np
+from matplotlib.figure import Figure
 
 from scripts._shared import (
     infer_target_path,
@@ -799,6 +799,7 @@ class MetricSummaryGui:
         try:
             import tkinter as tk
             from tkinter import filedialog, messagebox, ttk
+
             from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
         except ImportError as error:  # pragma: no cover - platform-owned dependency
             raise RuntimeError("The metric-summary GUI requires Tkinter.") from error
