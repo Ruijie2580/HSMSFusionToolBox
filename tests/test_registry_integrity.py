@@ -10,9 +10,9 @@ from __future__ import annotations
 import subprocess
 from pathlib import Path, PurePosixPath
 
+from hsmsfusion import LOSS_REGISTRY
 from hsmsfusion.core.registry import (
     DATASET_REGISTRY,
-    LOSS_REGISTRY,
     METRIC_REGISTRY,
     MODEL_REGISTRY,
     SPATIAL_OPERATOR_REGISTRY,

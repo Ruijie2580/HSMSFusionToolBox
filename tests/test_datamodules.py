@@ -71,7 +71,7 @@ def test_training_view_and_materialized_observations(tmp_path, dataset_name: str
     train_batch = next(iter(datamodule.train_dataloader()))
     validation_batch = next(iter(datamodule.val_dataloader()))
     assert "gt_hsi" not in train_batch
-    assert "index" in train_batch
+    assert "index" not in train_batch
     assert validation_batch["gt_hsi"].shape[1:] == (4, 8, 8)
     assert validation_batch["gt_hsi"].shape[0] == 1
     assert train_batch["lr_hsi"].shape[-2:] == (4, 4)

@@ -2,6 +2,7 @@
 
 from hsmsfusion.core.registry import (
     DATASET_REGISTRY,
+    LOSS_REGISTRY,
     METRIC_REGISTRY,
     MODEL_REGISTRY,
     SPATIAL_OPERATOR_REGISTRY,
@@ -10,6 +11,7 @@ from hsmsfusion.core.registry import (
 
 __all__ = [
     "DATASET_REGISTRY",
+    "LOSS_REGISTRY",
     "METRIC_REGISTRY",
     "MODEL_REGISTRY",
     "SPECTRAL_OPERATOR_REGISTRY",

@@ -45,7 +45,6 @@ class InMemoryFusionDataset(Dataset[dict[str, torch.Tensor]]):
         sample = {
             "lr_hsi": self.tensors["lr_hsi"][index],
             "hr_msi": self.tensors["hr_msi"][index],
-            "index": torch.tensor(index, dtype=torch.int64),
         }
         if self.expose_target:
             sample["gt_hsi"] = self.tensors["gt_hsi"][index]

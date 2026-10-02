@@ -41,7 +41,7 @@
 
 `core/registry.py` 中有六个全局注册表：`MODEL_REGISTRY`、`DATASET_REGISTRY`、
 `SPECTRAL_OPERATOR_REGISTRY`、`SPATIAL_OPERATOR_REGISTRY`、`METRIC_REGISTRY`、
-`LOSS_REGISTRY`（注意：`LOSS_REGISTRY` 未从包级 `__init__` re-export）。
+`LOSS_REGISTRY`。
 
 - 注册用装饰器：`@X_REGISTRY.register("name")`。名字大小写敏感、全局唯一；
   重名抛 `ConfigurationError`。
