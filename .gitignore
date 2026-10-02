@@ -13,15 +13,35 @@ dist/
 .hydra/
 
 # Experiment artifacts
-runs/
-output/
+/runs/
+/output/
 *.ckpt
 *.h5.tmp
 cli.log
 
 # Local datasets (large; see README for sources)
-Dataset/
-data/
+/Dataset/
+/data/
 
 # Editor / local agent state
 .zcode/
+
+# --- Not published ---
+# Only the CyberFuse recipe is reproduced faithfully from its paper. Every
+# other recipe's hyperparameters are smoke-test values, so the whole
+# experiment tree stays local except that one file.
+configs/experiment/*/
+!configs/experiment/chikusei/
+configs/experiment/chikusei/*
+!configs/experiment/chikusei/cyberfuse_x4.yaml
+
+# Model ports kept local only (KNLNet, SatFusion, SpecSolver, SSILNet).
+hsmsfusion/models/KNLNet/
+hsmsfusion/models/SatFusion/
+hsmsfusion/models/SpecSolver/
+hsmsfusion/models/SSILNet/
+tests/test_satfusion.py
+tests/test_ssilnet.py
+
+# Smoke-test figure dump.
+figures/metrics_smoke/
