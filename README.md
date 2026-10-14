@@ -96,7 +96,6 @@ DPI are all controlled from the GUI.
 python scripts/plot_pixel_sam.py
 ```
 
-`plot_metric_summary.py`汇总同一 dataset-scale 下各融合方法的测试指标（PSNR / SSIM / SAM / ERGAS / RMSE / UIQI 等，以 `metrics.csv` 实际列为准），绘制一指标一子图的箱线图，并导出 mean ± std 汇总表。优先读取 `metrics.csv`；缺失时自动从 `predictions.h5` 重算并写回。GUI 支持方法多选与拖拽排序、高亮、指标筛选；也可用 CLI：`python scripts/plot_metric_summary.py --benchmark chikusei_x4 --output-dir figures/metrics`。
 
 ```powershell
 python scripts/plot_metric_summary.py
